@@ -1,0 +1,25 @@
+{
+  "name": "food-monkey",
+  "version": "1.0.0",
+  "description": "food-monkey is way to get food at your doorstep without any hassle!",
+  "main": "app.js",
+  "git repository": "https://github.com/hiijitesh/food-monkey.git",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Jitesh Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
