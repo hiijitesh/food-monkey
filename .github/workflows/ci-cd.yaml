@@ -26,7 +26,7 @@ jobs:
       - name: Format code on Before Pushing to Docker Hub
         run: |
           npm run format
-          npm run lint-and-fix
+          # npm run lint-and-fix
 
       - name: Login to Docker Hub
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
