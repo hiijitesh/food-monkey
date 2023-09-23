@@ -14,7 +14,7 @@ module.exports = {
       data: err,
     });
   },
-  invalidFieldResponse: (res, erwr, message = "Empty fields") => {
+  invalidFieldResponse: (res, err, message = "Empty fields") => {
     console.error(err);
     return res.status(400).json({
       success: false,

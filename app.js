@@ -6,6 +6,14 @@ const { dbConnection } = require("./models");
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const userRouter = require("./routes/user.router");
+const router = require("./routes");
+const { isAuthenticated } = require("./utils/auth");
+
+app.use("/user", userRouter);
+app.use(isAuthenticated, router);
 
 dbConnection()
   .then(function () {

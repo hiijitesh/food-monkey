@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     "order",
     {
       foodId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "food",

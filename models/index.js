@@ -12,7 +12,20 @@ db.user = require("./user.model")(sequelizeInstance, DataTypes);
 db.restaurant = require("./restaurants.model")(sequelizeInstance, DataTypes);
 db.food = require("./food.model")(sequelizeInstance, DataTypes);
 db.menu = require("./menu.model")(sequelizeInstance, DataTypes);
+db.order = require("./order.model")(sequelizeInstance, DataTypes);
 db.address = require("./address.model")(sequelizeInstance, DataTypes);
+db.refreshToken = require("./refresh.model")(sequelizeInstance, DataTypes);
+
+const UserModel = db.user;
+const RestaurantModel = db.restaurant;
+const OrderModel = db.order;
+const FoodModel = db.food;
+const MenuModel = db.menu;
+const AddressModel = db.address;
+const RefreshTokenModel = db.refreshToken;
+
+// UserModel.hasMany(OrderModel);
+// UserModel.belongsTo(RestaurantModel);
 
 const dbConnection = async () => {
   try {
@@ -27,10 +40,14 @@ const dbConnection = async () => {
   }
 };
 
-const UserModel = db.user;
-const RestaurantModel = db.restaurant;
-const FoodModel = db.food;
-const MenuModel = db.menu;
-const AddressModel = db.address;
-
-module.exports = { db, dbConnection, UserModel, RestaurantModel, FoodModel, MenuModel, AddressModel };
+module.exports = {
+  db,
+  dbConnection,
+  UserModel,
+  OrderModel,
+  RestaurantModel,
+  FoodModel,
+  MenuModel,
+  AddressModel,
+  RefreshTokenModel,
+};

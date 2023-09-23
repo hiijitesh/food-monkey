@@ -23,6 +23,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
 
+      // addressId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: true,
+      //   references: {
+      //     model: "address",
+      //     key: "id",
+      //   },
+      // },
+
       profileImage: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -41,15 +50,16 @@ module.exports = (sequelize, DataTypes) => {
       totalOrder: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        allowNull: false,
+        allowNull: true,
       },
 
       numberOfShop: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        allowNull: false,
+        allowNull: true,
       },
     },
+    { freezeTableName: true },
     { timestamps: true },
   );
   return user;

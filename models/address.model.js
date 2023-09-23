@@ -8,6 +8,15 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
       },
 
+      customerId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "user",
+          key: "id",
+        },
+      },
+
       streetName: {
         type: DataTypes.STRING,
         allowNull: false,
