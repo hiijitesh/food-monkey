@@ -10,7 +10,7 @@ app.use(express.json());
 dbConnection()
   .then(function () {
     app.listen(PORT, function () {
-      console.log(`Server is running on the port ${PORT}`);
+      console.log(`Server is running on the port ${PORT} ✳️ ✳️ ✳️`);
     });
   })
   .catch(function (error) {
