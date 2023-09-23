@@ -3,9 +3,8 @@
 
 # npm run lint-and-fix
 # npm install -g json
+npm run format
 date=$(date +%d.%m.%Y)
 echo "Version: " $date
 json -I -f package.json -e "this.version=\"$date\""
 git add .
-git commit -m "feat(json): update version in package.json"
-npm run format
