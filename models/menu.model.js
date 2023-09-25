@@ -1,20 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
   const menu = sequelize.define(
-    "menus",
+    "menu",
     {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       category: {
-        type: DataTypes.ENUM,
-        values: ["veg", "non-veg", "breakfast, snacks", "main-course", "starter", "desserts"],
+        type: DataTypes.ENUM("veg", "non-veg", "breakfast", "snacks", "main-course", "starter", "desserts"),
         defaultValue: "veg",
+        allowNull: false,
       },
     },
+    { freezeTableName: true },
     {
       timestamps: true,
     },
   );
+
   return menu;
 };

@@ -8,32 +8,36 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       OwnerId: {
-        type: DataTypes.INTEGER, // user's phone
+        type: DataTypes.STRING(255), // user's phone
         allowNull: false,
         references: {
           model: "user",
-          key: "id",
+          key: "phone",
         },
       },
 
       address: {
-        type: DataTypes.INTEGER, // reference of Address Table
+        type: DataTypes.STRING(255), // reference of Address Table
         allowNull: false,
         references: {
           model: "address",
-          key: "id",
+          key: "pin",
         },
       },
 
-      menu: {
-        type: DataTypes.INTEGER, // menu Table
-        allowNull: true,
-      },
+      // menu: {
+      //   type: DataTypes.STRING(255), // menu Table
+      //   allowNull: true,
+      //   references: {
+      //     model: "menu",
+      //     key: "id",
+      //   },
+      // },
 
-      rating: {
-        type: DataTypes.INTEGER, // rating table
-        allowNull: true,
-      },
+      // rating: {
+      //   type: DataTypes.INTEGER, // rating table
+      //   allowNull: true,
+      // },
 
       openTime: {
         type: DataTypes.DATE,

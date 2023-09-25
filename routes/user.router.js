@@ -7,5 +7,6 @@ router.post("/login", userController.userLogin);
 router.post("/logout", userController.userLogout);
 router.post("/access-token", userController.getAccessToken);
 router.post("/add-email", isAuthenticated, userController.addUserEmail);
+router.post("/profileImage", isAuthenticated, userController.addProfilePhoto);
 
 module.exports = router;

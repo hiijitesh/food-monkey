@@ -2,8 +2,14 @@ module.exports = (sequelize, DataTypes) => {
   const order = sequelize.define(
     "order",
     {
-      foodId: {
+      id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+
+      foodId: {
+        type: DataTypes.STRING(255),
         allowNull: false,
         references: {
           model: "food",
@@ -12,38 +18,38 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       customerId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
         references: {
           model: "user",
-          key: "id",
+          key: "phone",
         },
       },
 
       deliveryBoyId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
         references: {
           model: "user",
-          key: "id",
+          key: "phone",
         },
       },
 
       addressId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
         references: {
           model: "address",
-          key: "id",
+          key: "pin",
         },
       },
 
       restaurantId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
         references: {
           model: "restaurant",
-          key: "id",
+          key: "restaurantId",
         },
       },
 

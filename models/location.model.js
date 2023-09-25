@@ -8,19 +8,26 @@ module.exports = (sequelize, DataTypes) => {
       //   defaultValue: [0, 0],
       //   allowNull: true,
       // },
+      locationId: {
+        type: DataTypes.INTEGER(1),
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+
       lat: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
+        type: DataTypes.FLOAT,
+        defaultValue: 0.0,
         allowNull: true,
       },
       long: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
+        type: DataTypes.FLOAT,
+        defaultValue: 0.0,
         allowNull: true,
       },
     },
-    { freezeTableName: true },
     {
+      freezeTableName: true,
       timestamps: true,
     },
   );

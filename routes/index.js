@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userRouter = require("./user.router");
+const addressRouter = require("./address.router");
 
 router.use("*", (req, res, next) => {
   // eslint-disable-next-line no-console
@@ -7,7 +7,7 @@ router.use("*", (req, res, next) => {
   next();
 });
 
-// router.use("/user", userRouter);
+router.use("/address", addressRouter);
 
 router.use("*", (req, res) => {
   return res.status(404).json({

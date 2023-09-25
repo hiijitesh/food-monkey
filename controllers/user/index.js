@@ -47,7 +47,6 @@ const controllers = {
         phone: phone,
         password: hashedPassword,
       };
-
       // since email is optional so we can add if email if it does exist
       if (email) {
         newUser.email = email;
@@ -61,6 +60,7 @@ const controllers = {
 
       return res.status(201).json({ message: "User created successfully", user: createdUser });
     } catch (error) {
+      console.error(error.message);
       res.status(500).json({ error: "User signup failed." });
       return;
     }
@@ -97,7 +97,7 @@ const controllers = {
 
       const access_token = generateToken(user, "access");
       const refresh_token = generateToken(user, "refresh");
-      await RefreshTokenModel.create({ token: refresh_token });
+      await RefreshTokenModel.create({ token: refresh_token, userId: phone });
 
       return res.status(200).json({
         message: "Login successful",
@@ -105,7 +105,7 @@ const controllers = {
         refresh_token,
       });
     } catch (error) {
-      res.status(500).json({ error: "Login failed. Try again!" });
+      res.status(500).json({ error: "Login failed. Try again!", message: error.message });
       return;
     }
   },
@@ -139,6 +139,7 @@ const controllers = {
     } catch (error) {
       res.status(500).json({
         error: "Access token generation failed. Try again!",
+        message: error.message,
       });
       return;
     }
@@ -168,7 +169,7 @@ const controllers = {
       res.status(200).json({ message: "Logout successful" });
       return;
     } catch (error) {
-      res.status(500).json({ error: "Logout failed. Try again" });
+      res.status(500).json({ error: "Logout failed. Try again", message: error.message });
       return;
     }
   },
@@ -183,7 +184,7 @@ const controllers = {
     }
     try {
       const existingUser = await UserModel.findOne({
-        where: { phone: req.userInfo.id },
+        where: { phone: req.userInfo.phone },
       });
 
       if (!existingUser) {
@@ -195,7 +196,33 @@ const controllers = {
 
       return res.status(201).json({ message: "Email added successfully." });
     } catch (error) {
-      res.status(500).json({ error: "Adding the email failed. Try again" });
+      res.status(500).json({ error: "Adding the email failed. Try again", message: error.message });
+      return;
+    }
+  },
+  // since email is optional so we can add email later on
+  addProfilePhoto: async (req, res) => {
+    const link = req.body.link;
+
+    if (!link) {
+      res.status(400).json({ error: "Invalid link" });
+      return;
+    }
+    try {
+      const existingUser = await UserModel.findOne({
+        where: { phone: req.userInfo.phone },
+      });
+
+      if (!existingUser) {
+        res.status(400).json({ error: "No user found." });
+        return;
+      }
+
+      await UserModel.update({ profileImage: link }, { where: { phone: existingUser.phone } });
+
+      return res.status(201).json({ message: "Profile Image added successfully." });
+    } catch (error) {
+      res.status(500).json({ error: "Adding the Profile Image failed. Try again", message: error.message });
       return;
     }
   },

@@ -5,15 +5,21 @@ module.exports = (sequelize, DataTypes) => {
       pin: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+
+      addressId: {
+        type: DataTypes.INTEGER(1),
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
       },
 
       customerId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        type: DataTypes.STRING(255),
+        allowNull: true,
         references: {
-          model: "user",
-          key: "id",
+          model: "users",
+          key: "phone",
         },
       },
 
@@ -24,12 +30,12 @@ module.exports = (sequelize, DataTypes) => {
 
       houserNumber: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
 
       flatNumber: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
 
       landmark: {
@@ -38,15 +44,15 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       locationId: {
-        type: DataTypes.STRING,
-        // references: {
-        //   model: "location",
-        //   key: "id",
-        // },
-        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: "locations",
+          key: "locationId",
+        },
+        allowNull: true,
       },
     },
-    { timestamps: true },
+    { timestamps: true, freezeTableName: true },
   );
   return address;
 };
