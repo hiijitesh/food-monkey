@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     "user",
     {
       phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
         primaryKey: true,
       },
@@ -21,15 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: true,
-      },
-
-      addressId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        references: {
-          model: "address",
-          key: "addressId",
-        },
       },
 
       profileImage: {

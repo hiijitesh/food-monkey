@@ -27,21 +27,25 @@ const RefreshTokenModel = db.refreshToken;
 
 UserModel.hasMany(RestaurantModel, {
   foreignKey: "ownerId",
+  as: "restaurant",
 });
 RestaurantModel.belongsTo(UserModel);
 
 UserModel.hasMany(AddressModel, {
   foreignKey: "customerId",
+  as: "address",
 });
 AddressModel.belongsTo(UserModel);
 
 UserModel.hasMany(OrderModel, {
   foreignKey: "customerId",
+  as: "order",
 });
 OrderModel.belongsTo(UserModel);
 
 MenuModel.hasMany(RestaurantModel, {
   foreignKey: "menuId",
+  as: "restaurant",
 });
 RestaurantModel.belongsTo(MenuModel);
 

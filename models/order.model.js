@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       deliveryBoyId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(255),
         allowNull: false,
         references: {
           model: "users",

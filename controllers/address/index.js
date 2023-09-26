@@ -1,13 +1,11 @@
-const { AddressModel } = require("../../models");
-const locationModel = require("../../models/location.model");
-const { errorResponse, invalidFieldResponse, successResponse } = require("../../utils");
+const { errorResponse, invalidFieldResponse, successResponse, forbiddenResponse } = require("../../utils");
 
 const addressServices = require("./service");
 
 const addressControllers = {
   createAddress: async (req, res) => {
     try {
-      const { pin, streetName, houserNumber, flatNumber, landmark, lat, long } = req.body;
+      const { pin, streetName, houserNumber, flatNumber, landmark } = req.body;
 
       const user = req.userInfo;
 
@@ -16,8 +14,6 @@ const addressControllers = {
       }
 
       // get location id using lat long
-      const location = await locationModel.create({ lat, long });
-
       const addressObj = {
         pin,
         streetName,
@@ -25,14 +21,78 @@ const addressControllers = {
         flatNumber,
         landmark,
         customerId: user.phone,
-        locationId: location.locationId,
+        // locationId: location.locationId,
       };
 
       const address = await addressServices.addAddress(addressObj);
-      console.log(address);
       return successResponse(res, address, "Address added successfully!");
     } catch (error) {
       return errorResponse(res, error.message, "address creation failed, try again");
+    }
+  },
+
+  getAddressByUserId: async (req, res) => {
+    try {
+      const { phone } = req.userInfo;
+      const { page, perPage } = req.body;
+      if (!phone) {
+        return forbiddenResponse(res, false, "your are not authorized");
+      }
+      const offset = (page - 1) * perPage;
+      const limit = perPage;
+      const data = await addressServices.addressByPhone(phone, limit, offset);
+
+      return successResponse(res, data, "Done");
+    } catch (error) {
+      return errorResponse(res, error.message, "address fetch failed, try again");
+    }
+  },
+
+  getAddressById: async (req, res) => {
+    try {
+      const { phone } = req.userInfo;
+      const { addressId } = req.params;
+      if (!phone) {
+        return forbiddenResponse(res, false, "your are not authorized");
+      }
+
+      if (!addressId) {
+        return invalidFieldResponse(res, addressId, "address id missing");
+      }
+
+      const data = await addressServices.addressById(addressId);
+
+      return successResponse(res, data, "Done");
+    } catch (error) {
+      return errorResponse(res, error.message, "address fetch failed, try again");
+    }
+  },
+
+  updateAddress: async (req, res) => {
+    try {
+      const { phone } = req.userInfo;
+      const { pin, streetName, houserNumber, flatNumber, landmark, addressId } = req.body;
+
+      if (!phone) {
+        return forbiddenResponse(res, false, "your are not authorized");
+      }
+      if (!addressId) {
+        return invalidFieldResponse(res, "provide address id");
+      }
+
+      const updateObj = {
+        pin,
+        streetName,
+        houserNumber,
+        flatNumber,
+        landmark,
+      };
+
+      const add = await addressServices.editAddress(addressId, phone, updateObj);
+
+      return successResponse(res, add, "address update");
+    } catch (error) {
+      return errorResponse(res, error.message, "address updating failed, try again");
     }
   },
 };

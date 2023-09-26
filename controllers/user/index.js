@@ -110,6 +110,42 @@ const controllers = {
     }
   },
 
+  // user by id
+  getUserById: async (req, res) => {
+    const { phone } = req.params;
+
+    if (!phone) {
+      res.status(400).json({
+        error: "Phone is required for Login.",
+      });
+      return;
+    }
+    try {
+      const user = await UserModel.findOne({ where: { phone }, attributes: { exclude: ["password"] } });
+      return res.status(200).json({
+        message: "user fetch successful",
+        user,
+      });
+    } catch (error) {
+      res.status(500).json({ error: "No user found.", message: error.message });
+      return;
+    }
+  },
+
+  // get all user
+  getAllUsers: async (req, res) => {
+    try {
+      const user = await UserModel.findAll({ attributes: { exclude: ["password"] } });
+      return res.status(200).json({
+        message: "user fetch successful",
+        user,
+      });
+    } catch (error) {
+      res.status(500).json({ error: "No user found.", message: error.message });
+      return;
+    }
+  },
+
   // This endpoint is used to get the access token.
   getAccessToken: async (req, res) => {
     const refresh_token = req.body.refresh_token;
