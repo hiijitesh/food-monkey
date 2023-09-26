@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     "user",
     {
       phone: {
-        type: DataTypes.STRING, // primary key
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
       },
@@ -27,8 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-          model: "addresses",
-          key: "pin",
+          model: "address",
+          key: "addressId",
         },
       },
 
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: false,
       },
 
-      isDeliverBoy: {
+      isDeliveryBoy: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },

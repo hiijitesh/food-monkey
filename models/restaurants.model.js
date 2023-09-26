@@ -7,32 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
 
-      OwnerId: {
-        type: DataTypes.STRING(255), // user's phone
-        allowNull: false,
-        references: {
-          model: "user",
-          key: "phone",
-        },
-      },
-
-      address: {
-        type: DataTypes.STRING(255), // reference of Address Table
+      addressId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "address",
-          key: "pin",
+          key: "addressId",
         },
       },
-
-      // menu: {
-      //   type: DataTypes.STRING(255), // menu Table
-      //   allowNull: true,
-      //   references: {
-      //     model: "menu",
-      //     key: "id",
-      //   },
-      // },
 
       // rating: {
       //   type: DataTypes.INTEGER, // rating table

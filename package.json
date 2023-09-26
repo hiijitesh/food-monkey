@@ -1,6 +1,6 @@
 {
   "name": "food-monkey",
-  "version": "26.09.2023",
+  "version": "27.09.2023",
   "description": "food-monkey is way to get food at your doorstep without any hassle!",
   "main": "app.js",
   "git repository": "https://github.com/hiijitesh/food-monkey.git",

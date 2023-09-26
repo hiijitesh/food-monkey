@@ -2,14 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   const order = sequelize.define(
     "order",
     {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-
       foodId: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "food",
@@ -17,39 +11,30 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
 
-      customerId: {
-        type: DataTypes.STRING(255),
-        allowNull: false,
-        references: {
-          model: "user",
-          key: "phone",
-        },
-      },
-
       deliveryBoyId: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "user",
+          model: "users",
           key: "phone",
         },
       },
 
       addressId: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "address",
-          key: "pin",
+          key: "addressId",
         },
       },
 
       restaurantId: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: "restaurant",
-          key: "restaurantId",
+          model: "restaurants",
+          key: "id",
         },
       },
 
@@ -59,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       distance: {
-        type: DataTypes.INTEGER, // rating table
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
 

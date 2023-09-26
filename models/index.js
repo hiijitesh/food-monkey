@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { sequelizeInstance } = require("../configs/db.config");
 const { Sequelize, DataTypes } = require("sequelize");
 
@@ -11,10 +12,10 @@ db.user = require("./user.model")(sequelizeInstance, DataTypes);
 db.refreshToken = require("./refresh.token.model")(sequelizeInstance, DataTypes);
 db.address = require("./address.model")(sequelizeInstance, DataTypes);
 db.location = require("./location.model")(sequelizeInstance, DataTypes);
-// db.restaurant = require("./restaurants.model")(sequelizeInstance, DataTypes);
-// db.food = require("./food.model")(sequelizeInstance, DataTypes);
-// db.menu = require("./menu.model")(sequelizeInstance, DataTypes);
-// db.order = require("./order.model")(sequelizeInstance, DataTypes);
+db.restaurant = require("./restaurants.model")(sequelizeInstance, DataTypes);
+db.food = require("./food.model")(sequelizeInstance, DataTypes);
+db.menu = require("./menu.model")(sequelizeInstance, DataTypes);
+db.order = require("./order.model")(sequelizeInstance, DataTypes);
 
 const UserModel = db.user;
 const RestaurantModel = db.restaurant;
@@ -24,29 +25,29 @@ const MenuModel = db.menu;
 const AddressModel = db.address;
 const RefreshTokenModel = db.refreshToken;
 
-// UserModel.hasMany(RestaurantModel, {
-//   foreignKey: "ownerId",
-// });
-// RestaurantModel.belongsTo(UserModel, {
-//   foreignKey: "restaurantId",
-// });
+UserModel.hasMany(RestaurantModel, {
+  foreignKey: "ownerId",
+});
+RestaurantModel.belongsTo(UserModel);
 
-// UserModel.hasMany(AddressModel, {
-//   foreignKey: "customerId",
-// });
-// AddressModel.belongsTo(UserModel, {
-//   foreignKey: "addressId",
-// });
+UserModel.hasMany(AddressModel, {
+  foreignKey: "customerId",
+});
+AddressModel.belongsTo(UserModel);
 
-// UserModel.hasMany(OrderModel, {
-//   foreignKey: "orderId",
-// });
-// OrderModel.belongsTo(UserModel, {
-//   foreignKey: "customerId",
-// });
+UserModel.hasMany(OrderModel, {
+  foreignKey: "customerId",
+});
+OrderModel.belongsTo(UserModel);
 
-// MenuModel.hasMany(FoodModel, { foreignKey: "menuId" });
-// FoodModel.belongsTo(MenuModel, { foreignKey: "foodId" });
+MenuModel.hasMany(RestaurantModel, {
+  foreignKey: "menuId",
+});
+RestaurantModel.belongsTo(MenuModel);
+
+// Define the association
+MenuModel.hasMany(FoodModel, { foreignKey: "menuId" });
+FoodModel.belongsTo(MenuModel);
 
 const dbConnection = async () => {
   try {
