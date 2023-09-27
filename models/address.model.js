@@ -2,16 +2,16 @@ module.exports = (sequelize, DataTypes) => {
   const address = sequelize.define(
     "address",
     {
-      pin: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-
       addressId: {
         type: DataTypes.INTEGER(1),
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+      },
+
+      pin: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
 
       locationId: {
@@ -22,15 +22,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         allowNull: true,
       },
-
-      // customerId: {
-      //   type: DataTypes.STRING(255)
-      //   allowNull: true,
-      //   references: {
-      //     model: "users",
-      //     key: "phone",
-      //   },
-      // },
 
       streetName: {
         type: DataTypes.STRING,

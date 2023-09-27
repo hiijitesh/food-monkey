@@ -31,6 +31,11 @@ UserModel.hasMany(RestaurantModel, {
 });
 RestaurantModel.belongsTo(UserModel);
 
+// RestaurantModel.hasMany(FoodModel, {
+//   foreignKey: "restaurantId",
+//   as: "restaurant",
+// });
+
 UserModel.hasMany(AddressModel, {
   foreignKey: "customerId",
   as: "address",
