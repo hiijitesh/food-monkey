@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const { sequelizeInstance, db } = require("../configs/db.config");
+const { sequelizeInstance, db } = require("../configs/dbConfig");
 const { DataTypes } = require("sequelize");
 
 // create schemas here
