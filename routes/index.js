@@ -1,11 +1,12 @@
 const router = require("express").Router();
+
 const addressRouter = require("./address");
 const foodRouter = require("./food");
 const userRouter = require("./users");
 
 router.use("*", (req, res, next) => {
     // eslint-disable-next-line no-console
-    console.log("=>", req.method, req.originalUrl);
+    console.log("==>>", req.method, req.originalUrl);
     next();
 });
 
