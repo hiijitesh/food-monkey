@@ -1,11 +1,6 @@
 /* eslint-disable no-console */
-const { sequelizeInstance } = require("../configs/db.config");
-const { Sequelize, DataTypes } = require("sequelize");
-
-const db = {
-  sequelize: sequelizeInstance,
-  Sequelize: Sequelize,
-};
+const { sequelizeInstance, db } = require("../configs/db.config");
+const { DataTypes } = require("sequelize");
 
 // create schemas here
 db.user = require("./users")(sequelizeInstance, DataTypes);
@@ -25,15 +20,17 @@ const MenuModel = db.menu;
 const AddressModel = db.address;
 const RefreshTokenModel = db.refreshToken;
 
+// UserModel has many restaurants
 UserModel.hasMany(RestaurantModel, {
   foreignKey: "ownerId",
-  as: "restaurant",
+  as: "restaurants",
 });
+// RestaurantModel belongs to a user
 RestaurantModel.belongsTo(UserModel);
 
 // RestaurantModel.hasMany(FoodModel, {
 //   foreignKey: "restaurantId",
-//   as: "restaurant",
+//   as: "restaurants",
 // });
 
 UserModel.hasMany(AddressModel, {
@@ -50,7 +47,7 @@ OrderModel.belongsTo(UserModel);
 
 MenuModel.hasMany(RestaurantModel, {
   foreignKey: "menuId",
-  as: "restaurant",
+  as: "restaurants",
 });
 RestaurantModel.belongsTo(MenuModel);
 
@@ -58,22 +55,7 @@ RestaurantModel.belongsTo(MenuModel);
 MenuModel.hasMany(FoodModel, { foreignKey: "menuId" });
 FoodModel.belongsTo(MenuModel);
 
-const dbConnection = async () => {
-  try {
-    await sequelizeInstance.authenticate();
-    console.log("Database connected ✅✅ ");
-    // The `force` option determines whether to drop and recreate the tables (true) or simply create them if they don't exist (false).
-    await db.sequelize.sync({ force: false });
-    console.log(`Database synced ✅ with ${process.env.DATABASE_NAME}`);
-  } catch (error) {
-    console.error("Database connection error:", error.message);
-    throw error;
-  }
-};
-
 module.exports = {
-  db,
-  dbConnection,
   UserModel,
   OrderModel,
   RestaurantModel,
