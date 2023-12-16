@@ -22,8 +22,8 @@ const RefreshTokenModel = db.refreshToken;
 
 // UserModel has many restaurants
 UserModel.hasMany(RestaurantModel, {
-  foreignKey: "ownerId",
-  as: "restaurants",
+    foreignKey: "ownerId",
+    as: "restaurants",
 });
 // RestaurantModel belongs to a user
 RestaurantModel.belongsTo(UserModel);
@@ -34,20 +34,20 @@ RestaurantModel.belongsTo(UserModel);
 // });
 
 UserModel.hasMany(AddressModel, {
-  foreignKey: "customerId",
-  as: "address",
+    foreignKey: "customerId",
+    as: "address",
 });
 AddressModel.belongsTo(UserModel);
 
 UserModel.hasMany(OrderModel, {
-  foreignKey: "customerId",
-  as: "order",
+    foreignKey: "customerId",
+    as: "order",
 });
 OrderModel.belongsTo(UserModel);
 
 MenuModel.hasMany(RestaurantModel, {
-  foreignKey: "menuId",
-  as: "restaurants",
+    foreignKey: "menuId",
+    as: "restaurants",
 });
 RestaurantModel.belongsTo(MenuModel);
 
@@ -56,11 +56,11 @@ MenuModel.hasMany(FoodModel, { foreignKey: "menuId" });
 FoodModel.belongsTo(MenuModel);
 
 module.exports = {
-  UserModel,
-  OrderModel,
-  RestaurantModel,
-  FoodModel,
-  MenuModel,
-  AddressModel,
-  RefreshTokenModel,
+    UserModel,
+    OrderModel,
+    RestaurantModel,
+    FoodModel,
+    MenuModel,
+    AddressModel,
+    RefreshTokenModel,
 };

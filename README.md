@@ -1,10 +1,10 @@
 # Food Monkey
 
-- Developed RESTful API using Node.js and Express.js for food delivery application with Postgres database.
+-   Developed RESTful API using Node.js and Express.js for food delivery application with Postgres database.
 
-- Implemented robust user authentication, ensuring 100% protection against unauthorized access.
+-   Implemented robust user authentication, ensuring 100% protection against unauthorized access.
 
-- Engineered search functionality to facilitate efficient food search by name.
+-   Engineered search functionality to facilitate efficient food search by name.
 
 ## Run these commands
 

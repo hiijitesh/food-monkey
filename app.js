@@ -2,7 +2,7 @@
 const express = require("express");
 const PORT = process.env.PORT || 6400;
 
-const { dbConnection } = require("./configs/db.config");
+const { dbConnection } = require("./configs/dbConfig");
 const app = express();
 
 app.use(express.json());
@@ -16,11 +16,11 @@ app.use("/user", userRouter);
 app.use(isAuthenticated, router);
 
 dbConnection()
-  .then(function () {
-    app.listen(PORT, function () {
-      console.log(`Server is running on the port ${PORT} ✳️ ✳️ ✳️`);
+    .then(function () {
+        app.listen(PORT, function () {
+            console.log(`Server is running on the port ${PORT} ✳️ ✳️ ✳️`);
+        });
+    })
+    .catch(function (error) {
+        console.log(error);
     });
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
