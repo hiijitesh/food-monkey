@@ -1,6 +1,6 @@
 {
   "name": "food-monkey",
-  "version": "28.09.2023",
+  "version": "16.12.2023",
   "description": "food-monkey is way to get food at your doorstep without any hassle!",
   "main": "app.js",
   "git repository": "https://github.com/hiijitesh/food-monkey.git",
@@ -10,7 +10,7 @@
     "test": "npx jest --passWithNoTests",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "lint-and-fix": "eslint . --ext .js --fix",
-    "format": "prettier --write --list-different.",
+    "format": "prettier --write --list-different .",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },

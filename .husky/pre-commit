@@ -7,4 +7,3 @@ npm run format
 date=$(date +%d.%m.%Y)
 echo "Version: " $date
 json -I -f package.json -e "this.version=\"$date\""
-git add .
