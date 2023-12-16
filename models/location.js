@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const location = sequelize.define(
-        "location",
+        "locations",
         {
             // coordinates: {
             //   type: DataTypes.ARRAY(DataTypes.INTEGER),

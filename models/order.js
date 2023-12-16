@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
     const order = sequelize.define(
-        "order",
+        "orders",
         {
             foodId: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: "food",
+                    model: "foods",
                     key: "id",
                 },
             },
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 references: {
-                    model: "address",
+                    model: "addresses",
                     key: "addressId",
                 },
             },
