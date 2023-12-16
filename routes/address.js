@@ -1,4 +1,4 @@
-const { addressController } = require("../controllers/");
+const { addressController } = require("../controllers");
 const router = require("express").Router();
 
 router.post("/new", addressController.createAddress);

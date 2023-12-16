@@ -1,4 +1,4 @@
-const { foodController } = require("../controllers/");
+const { foodController } = require("../controllers");
 const router = require("express").Router();
 
 router.post("/new", foodController.createFood);

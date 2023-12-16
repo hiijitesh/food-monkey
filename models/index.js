@@ -8,14 +8,14 @@ const db = {
 };
 
 // create schemas here
-db.user = require("./user.model")(sequelizeInstance, DataTypes);
-db.refreshToken = require("./refresh.token.model")(sequelizeInstance, DataTypes);
-db.address = require("./address.model")(sequelizeInstance, DataTypes);
-db.location = require("./location.model")(sequelizeInstance, DataTypes);
-db.restaurant = require("./restaurants.model")(sequelizeInstance, DataTypes);
-db.food = require("./food.model")(sequelizeInstance, DataTypes);
-db.menu = require("./menu.model")(sequelizeInstance, DataTypes);
-db.order = require("./order.model")(sequelizeInstance, DataTypes);
+db.user = require("./users")(sequelizeInstance, DataTypes);
+db.refreshToken = require("./refreshToken")(sequelizeInstance, DataTypes);
+db.address = require("./address")(sequelizeInstance, DataTypes);
+db.location = require("./location")(sequelizeInstance, DataTypes);
+db.restaurant = require("./restaurants")(sequelizeInstance, DataTypes);
+db.food = require("./food")(sequelizeInstance, DataTypes);
+db.menu = require("./menu")(sequelizeInstance, DataTypes);
+db.order = require("./order")(sequelizeInstance, DataTypes);
 
 const UserModel = db.user;
 const RestaurantModel = db.restaurant;

@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const addressRouter = require("./address.router");
-const foodRouter = require("./food.router");
+const addressRouter = require("./address");
+const foodRouter = require("./food");
+const userRouter = require("./users");
 
 router.use("*", (req, res, next) => {
   // eslint-disable-next-line no-console
@@ -10,10 +11,10 @@ router.use("*", (req, res, next) => {
 
 router.use("/address", addressRouter);
 router.use("/food", foodRouter);
+router.use("/users", userRouter);
 
 router.use("*", (req, res) => {
   return res.status(404).json({
-    success: false,
     message: "Not Found",
     route: req.originalUrl,
     method: req.method,

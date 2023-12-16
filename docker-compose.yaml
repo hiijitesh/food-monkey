@@ -14,10 +14,9 @@ services:
       DATABASE_USER_NAME: postgres
       DATABASE_PASSWORD: postgres
       DATABASE_NAME: spamdb
-    links:
-      - db
     volumes:
       - .:/app:z
+
   db:
     image: postgres:14.9-alpine3.18
     restart: always
