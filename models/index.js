@@ -35,13 +35,13 @@ RestaurantModel.belongsTo(UserModel);
 
 UserModel.hasMany(AddressModel, {
     foreignKey: "customerId",
-    as: "address",
+    as: "addresses",
 });
 AddressModel.belongsTo(UserModel);
 
 UserModel.hasMany(OrderModel, {
     foreignKey: "customerId",
-    as: "order",
+    as: "orders",
 });
 OrderModel.belongsTo(UserModel);
 
