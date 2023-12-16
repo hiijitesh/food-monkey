@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const userRouter = require("./routes/user.router");
+const userRouter = require("./routes/users");
 const router = require("./routes");
 const { isAuthenticated } = require("./utils/auth");
 

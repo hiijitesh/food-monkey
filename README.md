@@ -1,12 +1,10 @@
 # Food Monkey
 
-- Developed RESTful API using Node.js and Express.js for spam-blocking web application with MySQL database,
-  empowering users to report and search spam numbers.
+- Developed RESTful API using Node.js and Express.js for food delivery application with Postgres database.
 
 - Implemented robust user authentication, ensuring 100% protection against unauthorized access.
 
-- Engineered search functionality to facilitate efficient contact search by name or phone number, resulting in 30%
-  the surge in user engagement and a 25% increase in user retention
+- Engineered search functionality to facilitate efficient food search by name.
 
 ## Run these commands
 
