@@ -38,14 +38,14 @@ SHOW DATABASES;
 # enter into postresql
 sudo su - postgres
 
-# enter into user  `postgres user`
+# enter into user `postgres`
 psql
 
 # create database
 CREATE DATABASE spamdb;
 
 # create database with password
-CREATE USER spamdb WITH PASSWORD 'password';
+CREATE DATABASE spamdb WITH PASSWORD 'password';
 
 # grant all privilege
 GRANT ALL PRIVILEGES ON DATABASE spamdb TO myprojectuser;
@@ -53,8 +53,6 @@ GRANT ALL PRIVILEGES ON DATABASE spamdb TO myprojectuser;
 ```
 
 ### Useful Postgres commands
-
-#### Usefull Postgres commands
 
 | Task Description                                 | Command                                     |
 | ------------------------------------------------ | ------------------------------------------- |
