@@ -7,7 +7,7 @@ const addressControllers = {
         try {
             const { pin, streetName, houserNumber, flatNumber, landmark } = req.body;
 
-            const user = req.userInfo;
+            const user = req.user;
 
             if (!pin || !streetName || !houserNumber || !flatNumber) {
                 return invalidFieldResponse(res, "These fields can't be empty");
@@ -27,13 +27,14 @@ const addressControllers = {
             const address = await addressServices.addAddress(addressObj);
             return successResponse(res, address, "Address added successfully!");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "address creation failed, try again");
         }
     },
 
     getAddressByUserId: async (req, res) => {
         try {
-            const { phone } = req.userInfo;
+            const { phone } = req.user;
             const { page, perPage } = req.body;
             if (!phone) {
                 return forbiddenResponse(res, false, "your are not authorized");
@@ -44,13 +45,14 @@ const addressControllers = {
 
             return successResponse(res, data, "Done");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "address fetch failed, try again");
         }
     },
 
     getAddressById: async (req, res) => {
         try {
-            const { phone } = req.userInfo;
+            const { phone } = req.user;
             const { addressId } = req.params;
             if (!phone) {
                 return forbiddenResponse(res, false, "your are not authorized");
@@ -64,13 +66,14 @@ const addressControllers = {
 
             return successResponse(res, data, "Done");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "address fetch failed, try again");
         }
     },
 
     updateAddress: async (req, res) => {
         try {
-            const { phone } = req.userInfo;
+            const { phone } = req.user;
             const { pin, streetName, houserNumber, flatNumber, landmark, addressId } = req.body;
 
             if (!phone) {
@@ -92,6 +95,7 @@ const addressControllers = {
 
             return successResponse(res, add, "address update");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "address updating failed, try again");
         }
     },

@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (token) => {
     let decoded = {};
 
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err, paramdecoded) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, paramDecoded) => {
         if (err) {
             return;
         }
-        decoded = paramdecoded;
+        decoded = paramDecoded;
     });
     return decoded;
 };
@@ -35,7 +35,7 @@ const isAuthenticated = (req, res, next) => {
         });
     }
 
-    req.userInfo = decoded;
+    req.user = decoded;
     next();
 };
 

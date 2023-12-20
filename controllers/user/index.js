@@ -105,6 +105,7 @@ const controllers = {
                 refresh_token,
             });
         } catch (error) {
+            console.error(error.message);
             res.status(500).json({ error: "Login failed. Try again!", message: error.message });
             return;
         }
@@ -127,6 +128,7 @@ const controllers = {
                 user,
             });
         } catch (error) {
+            console.error(error.message);
             res.status(500).json({ error: "No user found.", message: error.message });
             return;
         }
@@ -173,6 +175,7 @@ const controllers = {
                 refresh_token,
             });
         } catch (error) {
+            console.error(error.message);
             res.status(500).json({
                 error: "Access token generation failed. Try again!",
                 message: error.message,
@@ -205,6 +208,7 @@ const controllers = {
             res.status(200).json({ message: "Logout successful" });
             return;
         } catch (error) {
+            console.error(error.message);
             res.status(500).json({ error: "Logout failed. Try again", message: error.message });
             return;
         }
@@ -220,7 +224,7 @@ const controllers = {
         }
         try {
             const existingUser = await UserModel.findOne({
-                where: { phone: req.userInfo.phone },
+                where: { phone: req.user.phone },
             });
 
             if (!existingUser) {
@@ -232,6 +236,7 @@ const controllers = {
 
             return res.status(201).json({ message: "Email added successfully." });
         } catch (error) {
+            console.error(error.message);
             res.status(500).json({ error: "Adding the email failed. Try again", message: error.message });
             return;
         }
@@ -246,7 +251,7 @@ const controllers = {
         }
         try {
             const existingUser = await UserModel.findOne({
-                where: { phone: req.userInfo.phone },
+                where: { phone: req.user.phone },
             });
 
             if (!existingUser) {
@@ -258,6 +263,7 @@ const controllers = {
 
             return res.status(201).json({ message: "Profile Image added successfully." });
         } catch (error) {
+            console.error(error.message);
             res.status(500).json({ error: "Adding the Profile Image failed. Try again", message: error.message });
             return;
         }

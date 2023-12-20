@@ -17,7 +17,7 @@ const controllers = {
                 isDessert,
             } = req.body;
 
-            //   const user = req.userInfo;
+            //   const user = req.user;
             // TODO: get restaurant id from restaurant table with user phone
 
             if (!name || !quantity || !fullPrice || !halfPrice) {
@@ -40,6 +40,7 @@ const controllers = {
             const food = await foodServices.addFood(foodObj);
             return successResponse(res, food, "Food added successfully!");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "Food creation failed, try again");
         }
     },
@@ -47,7 +48,7 @@ const controllers = {
     getAllFood: async (req, res) => {
         try {
             const { page, perPage } = req.body;
-            //   const user = req.userInfo;
+            //   const user = req.user;
 
             // TODO: get restaurant id from restaurant table
             const offset = (page - 1) * perPage;
@@ -55,6 +56,7 @@ const controllers = {
             const food = await foodServices.allFood(limit, offset);
             return successResponse(res, food, "Food fetch successfully!");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "Food fetch failed, try again!");
         }
     },
@@ -62,11 +64,12 @@ const controllers = {
     getFoodById: async (req, res) => {
         try {
             const { id } = req.params;
-            //   const user = req.userInfo;
+            //   const user = req.user;
 
             const food = await foodServices.foodById(id);
             return successResponse(res, food, "Food fetch successfully!");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "Food fetch failed, try again!");
         }
     },
@@ -104,6 +107,7 @@ const controllers = {
             const food = await foodServices.editFood(id, updateObj);
             return successResponse(res, food, "Food update successfully!");
         } catch (error) {
+            console.error(error.message);
             return errorResponse(res, error.message, "Food update failed, try again!");
         }
     },
