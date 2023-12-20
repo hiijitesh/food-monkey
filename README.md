@@ -48,7 +48,7 @@ CREATE DATABASE spamdb;
 CREATE DATABASE spamdb WITH PASSWORD 'password';
 
 # grant all privilege
-GRANT ALL PRIVILEGES ON DATABASE spamdb TO myprojectuser;
+GRANT ALL PRIVILEGES ON DATABASE "spamdb" TO "postgres";
 
 ```
 
