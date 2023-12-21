@@ -2,12 +2,19 @@ module.exports = (sequelize, DataTypes) => {
     const order = sequelize.define(
         "orders",
         {
-            foodId: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
+            // foodId: {
+            //     type: DataTypes.INTEGER,
+            //     allowNull: false,
+            //     references: {
+            //         model: "foods",
+            //         key: "id",
+            //     },
+            // },
+            customerId: {
+                type: DataTypes.INTEGER(1),
                 references: {
-                    model: "foods",
-                    key: "id",
+                    model: "users",
+                    key: "phone",
                 },
             },
 
@@ -41,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
             price: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
+                defaultValue: 0,
             },
 
             distance: {
@@ -48,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
             },
 
-            deliveryCharge: {
+            deliveryCharges: {
                 type: DataTypes.INTEGER,
                 defaultValue: 0,
                 allowNull: true,

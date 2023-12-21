@@ -16,6 +16,24 @@ module.exports = (sequelize, DataTypes) => {
                 },
             },
 
+            ownerId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "users",
+                    key: "phone",
+                },
+            },
+
+            menuId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                references: {
+                    model: "menu",
+                    key: "id",
+                },
+            },
+
             // rating: {
             //   type: DataTypes.INTEGER, // rating table
             //   allowNull: true,
@@ -36,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
             },
 
-            totalOrder: {
+            totalOrders: {
                 type: DataTypes.INTEGER,
                 defaultValue: 0,
                 allowNull: false,

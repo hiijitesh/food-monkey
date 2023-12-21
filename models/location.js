@@ -15,6 +15,15 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
             },
 
+            userId: {
+                type: DataTypes.INTEGER(1),
+                allowNull: false,
+                references: {
+                    model: "users",
+                    key: "phone",
+                },
+            },
+
             lat: {
                 type: DataTypes.FLOAT,
                 defaultValue: 0.0,
@@ -26,10 +35,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: true,
             },
         },
-        {
-            freezeTableName: true,
-            timestamps: true,
-        },
+        { timestamps: true },
     );
     return location;
 };

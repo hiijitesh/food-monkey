@@ -8,7 +8,13 @@ module.exports = (sequelize, DataTypes) => {
                 autoIncrement: true,
                 primaryKey: true,
             },
-
+            userId: {
+                type: DataTypes.INTEGER(1),
+                references: {
+                    model: "users",
+                    key: "phone",
+                },
+            },
             pin: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -17,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
             locationId: {
                 type: DataTypes.INTEGER,
                 references: {
-                    model: "location",
+                    model: "locations",
                     key: "locationId",
                 },
                 allowNull: true,

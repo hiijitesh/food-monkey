@@ -19,41 +19,25 @@ const FoodModel = db.food;
 const MenuModel = db.menu;
 const AddressModel = db.address;
 const RefreshTokenModel = db.refreshToken;
+const LocationModel = db.location;
 
-// UserModel has many restaurants
-UserModel.hasMany(RestaurantModel, {
-    foreignKey: "ownerId",
-    as: "restaurants",
-});
-// RestaurantModel belongs to a user
-RestaurantModel.belongsTo(UserModel);
+UserModel.hasMany(AddressModel, { foreignKey: "userId" });
+AddressModel.belongsTo(UserModel, { foreignKey: "userId" });
 
-// RestaurantModel.hasMany(FoodModel, {
-//   foreignKey: "restaurantId",
-//   as: "restaurants",
-// });
+UserModel.hasMany(LocationModel, { foreignKey: "userId" });
+LocationModel.belongsTo(UserModel, { foreignKey: "userId" });
 
-UserModel.hasMany(AddressModel, {
-    foreignKey: "customerId",
-    as: "addresses",
-});
-AddressModel.belongsTo(UserModel);
+UserModel.hasMany(RestaurantModel, { foreignKey: "ownerId" });
+RestaurantModel.belongsTo(UserModel, { foreignKey: "ownerId" });
 
-UserModel.hasMany(OrderModel, {
-    foreignKey: "customerId",
-    as: "orders",
-});
-OrderModel.belongsTo(UserModel);
+UserModel.hasMany(OrderModel, { foreignKey: "customerId" });
+OrderModel.belongsTo(UserModel, { foreignKey: "customerId" });
 
-MenuModel.hasMany(RestaurantModel, {
-    foreignKey: "menuId",
-    as: "restaurants",
-});
-RestaurantModel.belongsTo(MenuModel);
+MenuModel.hasMany(RestaurantModel, { foreignKey: "menuId" });
+RestaurantModel.belongsTo(MenuModel, { foreignKey: "menuId" });
 
-// Define the association
 MenuModel.hasMany(FoodModel, { foreignKey: "menuId" });
-FoodModel.belongsTo(MenuModel);
+FoodModel.belongsTo(MenuModel, { foreignKey: "menuId" });
 
 module.exports = {
     UserModel,
