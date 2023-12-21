@@ -11,6 +11,7 @@ const sequelizeInstance = new Sequelize(
         host: "localhost",
         port: "5432",
         dialect: "postgres",
+        logging: false,
     },
 );
 
@@ -31,7 +32,7 @@ const authenticateDatabase = async () => {
 
 const synchronizeDatabase = async () => {
     try {
-        await db.sequelize.sync({ force: false });
+        await db.sequelize.sync({ force: true });
         console.log(`Database synced ✅ with ${process.env.DATABASE_NAME}`);
     } catch (error) {
         console.error("Database synchronization error:", error.message);

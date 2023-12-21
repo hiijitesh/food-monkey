@@ -5,8 +5,8 @@ const foodServices = {
         try {
             return await FoodModel.create(foodObject);
         } catch (error) {
-            console.error(error);
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 
@@ -14,8 +14,8 @@ const foodServices = {
         try {
             return await FoodModel.update({ foodObject }, { where: { id: foodId } });
         } catch (error) {
-            console.error(error);
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 
@@ -23,8 +23,8 @@ const foodServices = {
         try {
             return await FoodModel.findOne({ where: { id: foodId } });
         } catch (error) {
-            console.error(error);
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 
@@ -32,8 +32,8 @@ const foodServices = {
         try {
             return await FoodModel.findAll({ limit: limits, offset: offsets });
         } catch (error) {
-            console.error(error);
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 };

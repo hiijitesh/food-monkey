@@ -10,8 +10,7 @@ const controllers = {
         const { phone, password, name, email } = req.body;
 
         if (!name || !password || !phone) {
-            res.status(400).json({ error: "Empty Name/Phone/Password." });
-            return;
+            return res.status(400).json({ error: "Empty Name/Phone/Password." });
         }
 
         if (
@@ -19,13 +18,11 @@ const controllers = {
             !validator.validatePhoneNumber(phone) ||
             !validator.validatePassword(password)
         ) {
-            res.status(400).json({ error: "Invalid Name/Phone/Password." });
-            return;
+            return res.status(400).json({ error: "Invalid Name/Phone/Password." });
         }
 
         if (email && !validator.validateEmail(email)) {
-            res.status(400).json({ error: "Invalid Email." });
-            return;
+            return res.status(400).json({ error: "Invalid Email." });
         }
 
         // check user already have signup
@@ -33,10 +30,9 @@ const controllers = {
             const existingUser = await UserModel.findOne({ where: { phone } });
 
             if (existingUser && existingUser.name != "NULL") {
-                res.status(400).json({
+                return res.status(400).json({
                     error: "already existing user found with this phone.",
                 });
-                return;
             }
 
             // user is new, hash the password
@@ -60,9 +56,8 @@ const controllers = {
 
             return res.status(201).json({ message: "User created successfully", user: createdUser });
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ error: "User signup failed." });
-            return;
+            console.error(error);
+            return res.status(500).json({ error: "User signup failed." });
         }
     },
 
@@ -72,10 +67,9 @@ const controllers = {
 
         // check phone or password is missing/empty
         if (!phone || !password) {
-            res.status(400).json({
+            return res.status(400).json({
                 error: "Phone and Password is required for Login.",
             });
-            return;
         }
 
         // find user in DB using phone number
@@ -83,16 +77,14 @@ const controllers = {
             const user = await UserModel.findOne({ where: { phone } });
 
             if (!user) {
-                res.status(400).json({ error: "No user found." });
-                return;
+                return res.status(400).json({ error: "No user found." });
             }
 
             // compare the user entered password and DB password of the user
             const matchPassword = await bcrypt.compare(password, user.password);
 
             if (!matchPassword) {
-                res.status(400).json({ error: "Wrong password." });
-                return;
+                return res.status(400).json({ error: "Wrong password." });
             }
 
             const access_token = generateToken(user, "access");
@@ -105,9 +97,8 @@ const controllers = {
                 refresh_token,
             });
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ error: "Login failed. Try again!", message: error.message });
-            return;
+            console.error(error);
+            return res.status(500).json({ error: "Login failed. Try again!", message: error.message });
         }
     },
 
@@ -116,10 +107,9 @@ const controllers = {
         const { phone } = req.params;
 
         if (!phone) {
-            res.status(400).json({
+            return res.status(400).json({
                 error: "Phone is required for Login.",
             });
-            return;
         }
         try {
             const user = await UserModel.findOne({ where: { phone }, attributes: { exclude: ["password"] } });
@@ -128,9 +118,8 @@ const controllers = {
                 user,
             });
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ error: "No user found.", message: error.message });
-            return;
+            console.error(error);
+            return res.status(500).json({ error: "No user found.", message: error.message });
         }
     },
 
@@ -143,8 +132,11 @@ const controllers = {
                 user,
             });
         } catch (error) {
-            res.status(500).json({ error: "No user found.", message: error.message });
-            return;
+            console.error(error);
+            return res.status(500).json({
+                error: "No user found.",
+                message: error.message,
+            });
         }
     },
 
@@ -153,8 +145,7 @@ const controllers = {
         const refresh_token = req.body.refresh_token;
 
         if (!refresh_token) {
-            res.status(400).json({ error: "Refresh token is missing." });
-            return;
+            return res.status(400).json({ error: "Refresh token is missing." });
         }
 
         try {
@@ -163,8 +154,7 @@ const controllers = {
             });
 
             if (!currentRefreshToken) {
-                res.status(400).json({ error: "Invalid refresh token." });
-                return;
+                return res.status(400).json({ error: "Invalid refresh token." });
             }
 
             const new_access_token = generateToken(currentRefreshToken, "access");
@@ -175,12 +165,11 @@ const controllers = {
                 refresh_token,
             });
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({
+            console.error(error);
+            return res.status(500).json({
                 error: "Access token generation failed. Try again!",
                 message: error.message,
             });
-            return;
         }
     },
 
@@ -189,8 +178,7 @@ const controllers = {
         const refresh_token = req.body.refresh_token;
 
         if (!refresh_token) {
-            res.status(400).json({ error: "Refresh token is missing." });
-            return;
+            return res.status(400).json({ error: "Refresh token is missing." });
         }
 
         try {
@@ -199,8 +187,7 @@ const controllers = {
             });
 
             if (!currentRefreshToken) {
-                res.status(400).json({ error: "Invalid refresh token." });
-                return;
+                return res.status(400).json({ error: "Invalid refresh token." });
             }
 
             await currentRefreshToken.destroy();
@@ -208,9 +195,11 @@ const controllers = {
             res.status(200).json({ message: "Logout successful" });
             return;
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ error: "Logout failed. Try again", message: error.message });
-            return;
+            console.error(error);
+            return res.status(500).json({
+                error: "Logout failed. Try again",
+                message: error.message,
+            });
         }
     },
 
@@ -219,8 +208,7 @@ const controllers = {
         const email = req.body.email;
 
         if (!email || !validator.validateEmail(email)) {
-            res.status(400).json({ error: "Invalid email address." });
-            return;
+            return res.status(400).json({ error: "Invalid email address." });
         }
         try {
             const existingUser = await UserModel.findOne({
@@ -228,17 +216,18 @@ const controllers = {
             });
 
             if (!existingUser) {
-                res.status(400).json({ error: "No user found." });
-                return;
+                return res.status(400).json({ error: "No user found." });
             }
 
             await UserModel.update({ email }, { where: { phone: existingUser.phone } });
 
             return res.status(201).json({ message: "Email added successfully." });
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ error: "Adding the email failed. Try again", message: error.message });
-            return;
+            console.error(error);
+            return res.status(500).json({
+                error: "Adding the email failed. Try again",
+                message: error.message,
+            });
         }
     },
     // since email is optional so we can add email later on
@@ -246,8 +235,7 @@ const controllers = {
         const link = req.body.link;
 
         if (!link) {
-            res.status(400).json({ error: "Invalid link" });
-            return;
+            return res.status(400).json({ error: "Invalid link" });
         }
         try {
             const existingUser = await UserModel.findOne({
@@ -255,17 +243,18 @@ const controllers = {
             });
 
             if (!existingUser) {
-                res.status(400).json({ error: "No user found." });
-                return;
+                return res.status(400).json({ error: "No user found." });
             }
 
             await UserModel.update({ profileImage: link }, { where: { phone: existingUser.phone } });
 
             return res.status(201).json({ message: "Profile Image added successfully." });
         } catch (error) {
-            console.error(error.message);
-            res.status(500).json({ error: "Adding the Profile Image failed. Try again", message: error.message });
-            return;
+            console.error(error);
+            return res.status(500).json({
+                error: "Adding the Profile Image failed. Try again",
+                message: error.message,
+            });
         }
     },
 };

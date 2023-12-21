@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
             },
             userId: {
-                type: DataTypes.INTEGER(1),
+                type: DataTypes.STRING(255),
                 references: {
                     model: "users",
                     key: "phone",
@@ -20,14 +20,14 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
 
-            locationId: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: "locations",
-                    key: "locationId",
-                },
-                allowNull: true,
-            },
+            // locationId: {
+            //     type: DataTypes.INTEGER,
+            //     references: {
+            //         model: "locations",
+            //         key: "locationId",
+            //     },
+            //     allowNull: true,
+            // },
 
             streetName: {
                 type: DataTypes.STRING,

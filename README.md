@@ -25,24 +25,25 @@ npm i
 
 ```bash
 mysql -h localhost -u root -p
-CREATE DATABASE spamdb;
+CREATE DATABASE foodmonkey;
 SHOW DATABASES;
 ```
 
 ### Postgres
 
 > The psql commands assist us in querying the data from the specified database interactively. Here are some of the most frequently used, most effective psql commands:
-> create new DATABASE
+
+-   create new DATABASE
 
 ```bash
-# enter into postresql
+# enter into postgres
 sudo su - postgres
 
 # enter into user `postgres`
 psql
 
 # create database
-CREATE DATABASE spamdb;
+CREATE DATABASE foodmonkey;
 
 # create user with password (in single quote)
 CREATE USER "newuser" WITH PASSWORD 'password';
@@ -56,7 +57,7 @@ GRANT ALL PRIVILEGES ON USER "newuser" TO "postgres";
 
 | Task Description                                 | Command                                     |
 | ------------------------------------------------ | ------------------------------------------- |
-| Connect to a Database                            | `psql -d spamdb -U postgres`                |
+| Connect to a Database                            | `psql -d foodmonkey -U postgres`            |
 | Check Postgres Version                           | `SELECT VERSION();` or `postgres --version` |
 | List All Databases                               | `\l`                                        |
 | Access or Switch a Database                      | `\c db_name`                                |
@@ -104,15 +105,15 @@ docker-compose logs -f
 telnet db 5433
 
 # check container exists
-docker exec -it spam-app cat /etc/hosts
+docker exec -it foodmonkey cat /etc/hosts
 docker exec -it postgres cat /etc/hosts
 
 # Ping Test Between Containers:
-docker exec -it spam-app ping postgres
-docker exec -it postgres ping spam-app
+docker exec -it foodmonkey ping postgres
+docker exec -it postgres ping foodmonkey
 
 # Check Container IP Addresses:
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' spam-app
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' foodmonkey
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
 
 ```

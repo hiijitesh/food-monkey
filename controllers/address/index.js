@@ -20,7 +20,7 @@ const addressControllers = {
                 houserNumber,
                 flatNumber,
                 landmark,
-                customerId: user.phone,
+                userId: user.phone,
                 // locationId: location.locationId,
             };
 

@@ -5,7 +5,8 @@ const addressServices = {
         try {
             return await AddressModel.create(data);
         } catch (error) {
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 
@@ -15,7 +16,8 @@ const addressServices = {
                 where: { addressId },
             });
         } catch (error) {
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 
@@ -24,16 +26,17 @@ const addressServices = {
             return await AddressModel.findAll({
                 where: { customerId: phone },
                 // include: [
-                //   {
-                //     model: AddressModel,
-                //     as: "address", // Use the same alias as defined in the association
-                //   },
+                //     {
+                //         model: AddressModel,
+                //         // as: "address", // Use the same alias as defined in the association
+                //     },
                 // ],
                 limit: limits,
                 offset: offsets,
             });
         } catch (error) {
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 
@@ -46,7 +49,8 @@ const addressServices = {
                 },
             );
         } catch (error) {
-            return error;
+            console.error(error.message);
+            return error.message;
         }
     },
 };
